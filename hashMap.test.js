@@ -18,6 +18,16 @@ test("set and get function check", () => {
   expect(HM.get("banana")).toBe("yellow");
 });
 
+test("remove function check", () => {
+  const HM = HashMap();
+  HM.set("hat", "black");
+  HM.set("frog", "green");
+  HM.set("ice cream", "white");
+  HM.remove("hat");
+  expect(HM.get("hat")).toBe(null);
+  expect(HM.get("frog")).toBe("green");
+});
+
 // test("set and value function check", () => {
 //   const HM = HashMap();
 //   HM.set("apple", "red");

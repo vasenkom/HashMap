@@ -79,6 +79,7 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     });
   }
 
+  // get(key) takes one argument as a key and returns the value that is assigned to this key
   function get(key) {
     let index = hash(key) % capacity;
 
@@ -99,7 +100,28 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     return null;
   }
 
-  return { hash, set, get };
+  function remove(key) {
+    let index = hash(key) % capacity;
+
+    // Throw an error if we try to access an out of bound index
+    if (index < 0 || index >= buckets.length) {
+      throw new Error("Trying to access newIndex out of bound");
+    }
+
+    if (!buckets[index]) {
+      return false;
+    }
+
+    for (let i = 0; i < buckets[index].length; i++) {
+      if (buckets[index][i][0] === key) {
+        buckets[index].splice(i, 1);
+        size--;
+        return true;
+      }
+    }
+  }
+
+  return { hash, set, get, remove, has };
 }
 
 module.exports = { HashMap };
