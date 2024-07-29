@@ -176,7 +176,6 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     let arrVal = [];
     buckets.forEach((bucket) => {
       if (bucket !== null) {
-        // Check if the bucket is not null
         for (let i = 0; i < bucket.length; i++) {
           arrVal.push(bucket[i][1]);
         }
@@ -185,7 +184,20 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     return arrVal;
   }
 
-  return { hash, set, get, remove, has, length, clear, keys, values };
+  // entries() returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
+  function entries() {
+    let arrKeyVal = [];
+    buckets.forEach((bucket) => {
+      if (bucket !== null) {
+        for (let i = 0; i < bucket.length; i++) {
+          arrKeyVal.push([bucket[i][0], bucket[i][1]]);
+        }
+      }
+    });
+    return arrKeyVal;
+  }
+
+  return { hash, set, get, remove, has, length, clear, keys, values, entries };
 }
 
 module.exports = { HashMap };

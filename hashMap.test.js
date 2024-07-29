@@ -68,3 +68,20 @@ test("keys and values function check", () => {
   expect(test.keys()).toContain("carrot", "dog", "elephant"); //  because its hard to predict the order
   expect(test.values()).toContain("orange", "brown", "gray");
 });
+
+test("entries function check", () => {
+  const test = HashMap();
+  test.set("carrot", "orange");
+  test.set("dog", "brown");
+  test.set("elephant", "gray");
+
+  // Extract entries and sort them to avoid order issues
+  const actualEntries = test.entries().sort();
+  const expectedEntries = [
+    ["carrot", "orange"],
+    ["dog", "brown"],
+    ["elephant", "gray"],
+  ].sort();
+
+  expect(actualEntries).toEqual(expectedEntries);
+});
