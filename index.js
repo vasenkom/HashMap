@@ -1,7 +1,7 @@
 function HashMap(initialCapacity = 16, loadFactor = 0.75) {
   let buckets = Array(initialCapacity).fill(null);
   let capacity = initialCapacity;
-  let size = 0;
+  let size = 0; // calculates the number of key-value pairs
 
   function hash(key) {
     if (!key) {
@@ -121,7 +121,7 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     }
   }
 
-  //  has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
+  //  has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map
   function has(key) {
     let index = hash(key) % capacity;
 
@@ -131,7 +131,7 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     }
 
     if (!buckets[index]) {
-      return null;
+      return false;
     }
 
     for (let i = 0; i < buckets[index].length; i++) {
@@ -142,7 +142,22 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     return false;
   }
 
-  return { hash, set, get, remove, has };
+  //  length() returns the number of stored keys in the hash map
+  function length() {
+    return size;
+  }
+
+  // clear() removes all entries in the hash map
+  function clear() {
+    buckets.forEach((bucket, index) => {
+      if (bucket !== null) {
+        buckets[index] = null;
+      }
+    });
+    size = 0;
+  }
+
+  return { hash, set, get, remove, has, length, clear };
 }
 
 module.exports = { HashMap };
