@@ -28,6 +28,18 @@ test("remove function check", () => {
   expect(HM.get("frog")).toBe("green");
 });
 
+test("set and has function check", () => {
+  const HM = HashMap();
+  HM.set("apple", "red");
+  HM.set("banana", "yellow");
+  HM.set("apple", "green");
+  HM.set("hat", "black");
+  HM.remove("hat");
+  expect(HM.has("apple")).toBe(true);
+  expect(HM.has("hat")).toBe(false);
+  expect(HM.has("banana")).toBe(true);
+});
+
 // test("set and value function check", () => {
 //   const HM = HashMap();
 //   HM.set("apple", "red");

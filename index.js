@@ -121,6 +121,27 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     }
   }
 
+  //  has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
+  function has(key) {
+    let index = hash(key) % capacity;
+
+    // Throw an error if we try to access an out of bound index
+    if (index < 0 || index >= buckets.length) {
+      throw new Error("Trying to access index out of bound");
+    }
+
+    if (!buckets[index]) {
+      return null;
+    }
+
+    for (let i = 0; i < buckets[index].length; i++) {
+      if (buckets[index][i][0] === key) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return { hash, set, get, remove, has };
 }
 
