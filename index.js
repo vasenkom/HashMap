@@ -25,7 +25,11 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
       throw new Error("Trying to access index out of bound");
     }
 
-    // Updating the value if the key existed
+    if (!buckets[index]) {
+      buckets[index] = [];
+    }
+
+    // Check if the key already exists and update the value
     for (let i = 0; i < buckets[index].length; i++) {
       if (buckets[index][i][0] === key) {
         buckets[index][i][1] = value;
@@ -75,7 +79,27 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     });
   }
 
-  return { hash, set };
+  function get(key) {
+    let index = hash(key) % capacity;
+
+    // Throw an error if we try to access an out of bound index
+    if (index < 0 || index >= buckets.length) {
+      throw new Error("Trying to access newIndex out of bound");
+    }
+
+    if (!buckets[index]) {
+      return null;
+    }
+
+    for (let i = 0; i < buckets[index].length; i++) {
+      if (buckets[index][i][0] === key) {
+        return buckets[index][i][1];
+      }
+    }
+    return null;
+  }
+
+  return { hash, set, get };
 }
 
 module.exports = { HashMap };
