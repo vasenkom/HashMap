@@ -60,19 +60,11 @@ test("clear function check", () => {
   expect(test.has("kite")).toBe(false);
 });
 
-test("keys function check", () => {
+test("keys and values function check", () => {
   const test = HashMap();
   test.set("carrot", "orange");
   test.set("dog", "brown");
   test.set("elephant", "gray");
   expect(test.keys()).toContain("carrot", "dog", "elephant"); //  because its hard to predict the order
+  expect(test.values()).toContain("orange", "brown", "gray");
 });
-
-// test("set and value function check", () => {
-//   const HM = HashMap();
-//   HM.set("apple", "red");
-//   HM.set("banana", "yellow");
-//   HM.set("apple", "green");
-//   expect(HM.value("green")).toBe(true);
-//   expect(HM.value("red")).toBe(false);
-// });

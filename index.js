@@ -171,7 +171,21 @@ function HashMap(initialCapacity = 16, loadFactor = 0.75) {
     return arr;
   }
 
-  return { hash, set, get, remove, has, length, clear, keys };
+  // values() returns an array containing all the values.
+  function values() {
+    let arrVal = [];
+    buckets.forEach((bucket) => {
+      if (bucket !== null) {
+        // Check if the bucket is not null
+        for (let i = 0; i < bucket.length; i++) {
+          arrVal.push(bucket[i][1]);
+        }
+      }
+    });
+    return arrVal;
+  }
+
+  return { hash, set, get, remove, has, length, clear, keys, values };
 }
 
 module.exports = { HashMap };
